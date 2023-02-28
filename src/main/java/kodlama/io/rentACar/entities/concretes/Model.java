@@ -1,5 +1,6 @@
 package kodlama.io.rentACar.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,11 +20,9 @@ public class Model {
     @Column(name = "model_id")
     private int modelId;
 
-    @Column(name = "price")
-    private double price;
 
     @Column(name = "name")
-    private String name;
+    private String modelName;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")

@@ -29,7 +29,7 @@ public class BrandManager implements BrandService {
     public BrandManager(BrandRepository brandRepository, ModelMapperService modelMapperService, BrandBusinessRules brandBusinessRules) {
         this.brandRepository = brandRepository;
         this.modelMapperService = modelMapperService;
-        this.brandBusinessRules=brandBusinessRules;
+        this.brandBusinessRules = brandBusinessRules;
 
     }
 
@@ -56,10 +56,8 @@ public class BrandManager implements BrandService {
     @Override
     public void add(CreateBrandRequest createBrandRequest) {
 
-        // Brand brand=new Brand();
-        //brand.setBrandName(createBrandRequest.getName());
-
         this.brandBusinessRules.checkIfBrandNameExists(createBrandRequest.getBrandName());
+        this.brandBusinessRules.sizeBrandName(createBrandRequest.getBrandName());
 
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
         this.brandRepository.save(brand);

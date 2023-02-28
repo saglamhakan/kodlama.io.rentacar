@@ -25,14 +25,7 @@ public class  RentACarApplication {
 		SpringApplication.run(RentACarApplication.class, args);
 	}
 
-	@ExceptionHandler
-	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-	public ProblemDetails handleBusinessException(MethodArgumentNotValidException methodArgumentNotValidException){
-		ProblemDetails problemDetails=new ProblemDetails();
-		problemDetails.setMessage(methodArgumentNotValidException.getMessage());
 
-		return problemDetails;
-	}
 
 	@ExceptionHandler
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
@@ -46,6 +39,22 @@ public class  RentACarApplication {
 		}
 		return validationProblemDetails;
 	}
+
+	@ExceptionHandler
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	public ProblemDetails handleBusinessException(Exception ex){
+		ProblemDetails problemDetails=new ProblemDetails();
+		problemDetails.setMessage(ex.getMessage());
+
+		return problemDetails;
+	}
+
+
+
+
+
+
+
 
 
 

@@ -4,18 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Access;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class GetAllModelsResponse {
+public class GetByNameModelsResponse {
 
     private int modelId;
-
     private String modelName;
-
-    private String brandName;
-
 }

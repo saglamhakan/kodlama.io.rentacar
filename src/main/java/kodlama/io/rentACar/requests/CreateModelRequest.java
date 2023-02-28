@@ -16,11 +16,11 @@ public class CreateModelRequest {
     @NotNull
     @NotBlank
     @Size(min = 3, max = 20)
-    private String name;
+    private String modelName;
 
     @NotNull
     @NotBlank
     private int brandId;
 
-    private int price;
+
 }

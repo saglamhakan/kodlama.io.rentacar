@@ -1,21 +1,19 @@
-package kodlama.io.rentACar.responses;
+package kodlama.io.rentACar.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Access;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class GetAllModelsResponse {
+public class UpdateModelRequest {
 
     private int modelId;
-
     private String modelName;
 
-    private String brandName;
+    private int brandId;
+
+
 
 }
