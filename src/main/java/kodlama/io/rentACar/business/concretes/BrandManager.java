@@ -1,6 +1,7 @@
 package kodlama.io.rentACar.business.concretes;
 
 import kodlama.io.rentACar.business.abstracts.BrandService;
+import kodlama.io.rentACar.business.rules.BrandBusinessRules;
 import kodlama.io.rentACar.core.utilities.mappers.ModelMapperService;
 import kodlama.io.rentACar.dataAccess.abstracts.BrandRepository;
 import kodlama.io.rentACar.entities.concretes.Brand;
@@ -22,30 +23,32 @@ public class BrandManager implements BrandService {
     private BrandRepository brandRepository;
     private ModelMapperService modelMapperService;
 
+    private BrandBusinessRules brandBusinessRules;
+
     @Autowired
-    public BrandManager(BrandRepository brandRepository, ModelMapperService modelMapperService) {
+    public BrandManager(BrandRepository brandRepository, ModelMapperService modelMapperService, BrandBusinessRules brandBusinessRules) {
         this.brandRepository = brandRepository;
-        this.modelMapperService=modelMapperService;
+        this.modelMapperService = modelMapperService;
+        this.brandBusinessRules=brandBusinessRules;
+
     }
 
 
     @Override
     public List<GetAllBrandsResponse> getAll() {
 
-        List<Brand> brands=brandRepository.findAll();
+        List<Brand> brands = brandRepository.findAll();
 
-        List<GetAllBrandsResponse> brandsResponse=brands.stream()
+        List<GetAllBrandsResponse> brandsResponse = brands.stream()
                 .map(brand -> this.modelMapperService.forResponse()
                         .map(brand, GetAllBrandsResponse.class)).collect(Collectors.toList());
-            return brandsResponse;
+        return brandsResponse;
     }
 
     @Override
     public GetByIdBrandResponse findById(int brandId) {
-
-        Brand brand=this.brandRepository.findById(brandId).orElseThrow();
-
-        GetByIdBrandResponse response=this.modelMapperService.forResponse().map(brand, GetByIdBrandResponse.class);
+        Brand brand = this.brandRepository.findById(brandId).orElseThrow();
+        GetByIdBrandResponse response = this.modelMapperService.forResponse().map(brand, GetByIdBrandResponse.class);
 
         return response;
     }
@@ -53,17 +56,19 @@ public class BrandManager implements BrandService {
     @Override
     public void add(CreateBrandRequest createBrandRequest) {
 
-       // Brand brand=new Brand();
+        // Brand brand=new Brand();
         //brand.setBrandName(createBrandRequest.getName());
 
-        Brand brand=this.modelMapperService.forRequest().map(createBrandRequest,Brand.class);
+        this.brandBusinessRules.checkIfBrandNameExists(createBrandRequest.getBrandName());
+
+        Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
         this.brandRepository.save(brand);
     }
 
     @Override
     public void update(UpdateBrandRequest updateBrandRequest) {
 
-        Brand brand=this.modelMapperService.forRequest().map(updateBrandRequest, Brand.class);
+        Brand brand = this.modelMapperService.forRequest().map(updateBrandRequest, Brand.class);
         this.brandRepository.save(brand);
     }
 

@@ -5,6 +5,7 @@ import kodlama.io.rentACar.requests.CreateBrandRequest;
 import kodlama.io.rentACar.requests.UpdateBrandRequest;
 import kodlama.io.rentACar.responses.GetAllBrandsResponse;
 import kodlama.io.rentACar.responses.GetByIdBrandResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

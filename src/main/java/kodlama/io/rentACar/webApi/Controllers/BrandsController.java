@@ -9,8 +9,10 @@ import kodlama.io.rentACar.responses.GetByIdBrandResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +21,6 @@ public class BrandsController {
 
 
     private BrandService brandService;
-
     @Autowired
     public BrandsController(BrandService brandService) {
         this.brandService = brandService;
@@ -37,7 +38,7 @@ public class BrandsController {
 
     @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void add(@RequestBody CreateBrandRequest createBrandRequest) {
+    public void add(@RequestBody  @Valid CreateBrandRequest createBrandRequest) {
         this.brandService.add(createBrandRequest);
     }
 
