@@ -11,7 +11,9 @@ import java.util.List;
 public interface ModelRepository extends JpaRepository<Model, Integer> {
  //   List<GetByNameModelsResponse> getByBrand_BrandName(String brandName);
 
-    List<Model> findByModelName(String brandName);
+    //List<Model> findByModelName(String brandName);
+
+    List<Model> findByBrand_BrandName(String brandName);//Jpa naming convention
 
     boolean existsByModelName(String modelName);
 

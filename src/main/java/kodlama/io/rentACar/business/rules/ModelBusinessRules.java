@@ -18,9 +18,14 @@ public class ModelBusinessRules {
             throw new BusinessException("Model name already exists");
         }
     }
+
     public void sizeModelName(String modelName){
         if (modelName.length()<3){
             throw new BusinessException("Model name cannot be less than two letters");
         }
     }
+
+
 }
+
+

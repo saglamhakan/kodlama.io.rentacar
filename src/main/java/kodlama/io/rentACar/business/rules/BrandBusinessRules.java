@@ -18,12 +18,14 @@ public class BrandBusinessRules {
         }
 
     }
-
+/*
     public void sizeBrandName(String brandName){
         if (brandName.length()<2){
             throw new BusinessException("Brand name cannot be less than two letters");
         }
     }
 
-   
+
+
+ */
 }

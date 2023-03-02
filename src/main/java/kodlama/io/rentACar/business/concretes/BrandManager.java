@@ -3,6 +3,7 @@ package kodlama.io.rentACar.business.concretes;
 import kodlama.io.rentACar.business.abstracts.BrandService;
 import kodlama.io.rentACar.business.rules.BrandBusinessRules;
 import kodlama.io.rentACar.core.utilities.mappers.ModelMapperService;
+import kodlama.io.rentACar.core.utilities.mappers.exceptions.ValidationProblemDetails;
 import kodlama.io.rentACar.dataAccess.abstracts.BrandRepository;
 import kodlama.io.rentACar.entities.concretes.Brand;
 import kodlama.io.rentACar.requests.CreateBrandRequest;
@@ -25,11 +26,15 @@ public class BrandManager implements BrandService {
 
     private BrandBusinessRules brandBusinessRules;
 
+
+
+
     @Autowired
     public BrandManager(BrandRepository brandRepository, ModelMapperService modelMapperService, BrandBusinessRules brandBusinessRules) {
         this.brandRepository = brandRepository;
         this.modelMapperService = modelMapperService;
         this.brandBusinessRules = brandBusinessRules;
+
 
     }
 
@@ -57,7 +62,7 @@ public class BrandManager implements BrandService {
     public void add(CreateBrandRequest createBrandRequest) {
 
         this.brandBusinessRules.checkIfBrandNameExists(createBrandRequest.getBrandName());
-        this.brandBusinessRules.sizeBrandName(createBrandRequest.getBrandName());
+        //this.brandBusinessRules.sizeBrandName(createBrandRequest.getBrandName());
 
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
         this.brandRepository.save(brand);

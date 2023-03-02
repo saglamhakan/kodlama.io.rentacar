@@ -50,7 +50,7 @@ public class ModelManager implements ModelService {
 
     @Override
     public List<GetByNameModelsResponse> getByBrandName(String brandName) {
-        List<Model> models=modelRepository.findByModelName(brandName);
+        List<Model> models=modelRepository.findByBrand_BrandName(brandName);
         List<GetByNameModelsResponse> modelsResponse=models.stream()
                 .map(model -> this.modelMapperService.forResponse()
                         .map(model, GetByNameModelsResponse.class)).collect(Collectors.toList());
